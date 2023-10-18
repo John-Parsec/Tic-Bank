@@ -36,7 +36,7 @@ class Transacao{
         double valor;
 
     public:
-        Transacao(int id, Data data, string descricao, double valor);
+        Transacao(Data data, string descricao, double valor);
         int getId();
         Data getData();
         string getDescricao();
@@ -61,19 +61,17 @@ class Conta{
         string geraNumero();
 
     public:
-        Conta(string nome, double saldo); //saldo default = 0
+        Conta(string nome); //saldo default = 0
         
         virtual string getNome();
         virtual string getNumero();
         virtual double getSaldo();
         virtual vector<Transacao> getTransacoes();
-        virtual Transacao getTransacaoById();   //retorna uma transacao pelo id
+        virtual Transacao getTransacaoById(int id);   //retorna uma transacao pelo id
 
         virtual void setNome(string nome);
         virtual void setNumero(string numero);
-        virtual void setSaldo(double saldo);
 
-        virtual void addTransacao(Transacao transacao);
         virtual void deposito(double valor); //todo deposito add uma transacao
         virtual void saque(double valor);  //todo saque add uma transacao
         virtual void extrato();
@@ -88,7 +86,7 @@ class ContaCorrente : public Conta{
     private:
 
     public:
-        ContaCorrente(string nome, double saldo);
+        ContaCorrente(string nome);
 };
 
 class ContaCorrenteL : public Conta{
@@ -96,7 +94,7 @@ class ContaCorrenteL : public Conta{
         double limite;
 
     public:
-        ContaCorrenteL(string nome, double saldo, double limite);
+        ContaCorrenteL(string nome, double limite);
         double getLimite();
         void setLimite(double limite);
 };
@@ -106,7 +104,7 @@ class ContaPoupanca : public Conta{
         Data aniversario;
 
     public:
-        ContaPoupanca(string nome, double saldo, Data aniversario);
+        ContaPoupanca(string nome, Data aniversario);
         Data getAniversario();
         void setAniversario(Data aniversario);
 };
